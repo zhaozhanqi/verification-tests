@@ -481,7 +481,6 @@ Feature: SDN related networking scenarios
   # @author zzhao@redhat.com
   # @case_id OCP-43146
   @admin
-  @4.9
   Scenario: Disable conntrack for vxlan traffic
     Given the env is using "OpenShiftSDN" networkType
     Given I select a random node's host
@@ -489,7 +488,7 @@ Feature: SDN related networking scenarios
       | iptables -t raw -S |
     Then the step should succeed
     And the output should contain:
-      | -N OPENSHIFT-NOTRACK                                                                  |
+      | -N OPENSHIFT-NOTRACK |
       | -A PREROUTING -m comment --comment "disable conntrack for vxlan" -j OPENSHIFT-NOTRACK |
-      | -A OUTPUT -m comment --comment "disable conntrack for vxlan" -j OPENSHIFT-NOTRACK     |
-      | -A OPENSHIFT-NOTRACK -p udp -m udp --dport 4789 -j NOTRACK                            |
+      | -A OUTPUT -m comment --comment "disable conntrack for vxlan" -j OPENSHIFT-NOTRACK |
+      | -A OPENSHIFT-NOTRACK -p udp -m udp --dport 4789 -j NOTRACK |
